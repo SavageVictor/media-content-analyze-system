@@ -2,114 +2,91 @@ const express = require('express');
 const connection = require('./connection');
 const router = express.Router();
 
-router.post('/result', (req, res) => {
-  const { title, description, request_id } = req.body;
+function handle_error(res, error, message) {
+  if (error) {
+    res.status(500);
+    console.log(error);
+    res.send('Something went wrong.');
+  }
+  else if (message) {
+    res.send(message);
+  }
+}
+
+router.post('/source', (req, res) => {
+  const { url, request_id } = req.body;
   
-  if(!(title && description && request_id)) {
-    res.send('There is empty field.');
+  if(!(url && request_id)) {
+    res.status(400);
+    res.send('There is an empty field: url or request_id).');
     return;
   }
   
   connection.query(
-    `INSERT INTO result (id, title, description, request_id) 
-    VALUES (DEFAULT, '${title}', '${description}', ${request_id})`,
-  (error) => {
-    if (error) {
-      console.log(error);
-      res.send('Something went wrong.');
-      return;
-    }
-    res.send('Record has been added');
-  });
+    `INSERT INTO source (id, url, request_id) 
+    VALUES (DEFAULT, '${url}', ${request_id})`,
+  (error) => handle_error(res, error, 'Record has been added'));
 });
   
-router.post('/result/:id', (req, res) => {
+router.post('/source/:id', (req, res) => {
   const id = req.params.id;
-  const { title, description, request_id } = req.body;
+  const { url, request_id } = req.body;
   
-  if(!(title && description && request_id)) {
+  if(!(url && request_id)) {
+    res.status(400);
     res.send('There is empty field.');
     return;
   } 
   
   connection.query(
-    `INSERT INTO result (id, title, description, request_id) 
-    VALUES (${id}, '${title}', '${description}', ${request_id})`,
-  (error) => {
-    if (error) {
-      console.log(error);
-      res.send('Something went wrong.');
-      return;
-    }
-    res.send('Record has been added');
-  });
+    `INSERT INTO source (id, url, request_id) 
+    VALUES (${id}, '${url}', ${request_id})`,
+    (error) => handle_error(res, error, 'Record has been added'));
 });
   
-router.get('/results', (req, res) => {
-  connection.query('SELECT * FROM result', 
-  (error, result) => {
-    if (error) {
-      console.log(error);
-      res.send('Something went wrong.');
-      return;
-    }
-    res.send(result);
-  });
+router.get('/sources', (req, res) => {
+  connection.query('SELECT * FROM source', 
+  (error, result) => handle_error(res, error, result));
 });
   
-router.get('/result/:id', (req, res) => {
+router.get('/source/:id', (req, res) => {
   const id = req.params.id;
-  connection.query(`SELECT * FROM result WHERE id = ${id}`,
-  (error, result) => {
-    if (error) {
-      console.log(error);
-      res.send('Something went wrong.');
-      return;
-    }
-    res.send(result);
-  });
+  connection.query(`SELECT * FROM source WHERE id = ${id}`,
+  (error, result) => handle_error(res, error, result));
 });
   
-router.put('/result/:id', (req, res) => {
+router.put('/source/:id', (req, res) => {
   const id = req.params.id;
   
-  connection.query(`SELECT * FROM result WHERE id = ${id}`,
+  connection.query(`SELECT * FROM source WHERE id = ${id}`,
   (error, [result]) => {
+    if (!result) {
+      res.status(404);
+      res.send("Record not found");
+      return;
+    }
+
     if (error) {
+      res.status(500);
       console.log(result);
       console.log(error);
       res.send('Something went wrong.');
       return;
     }
-    const { title, description, request_id } = { ...result, ...req.body};
+    const { url, request_id } = { ...result, ...req.body};
     connection.query(
-      `UPDATE result 
-      SET title = '${title}', 
-      description = '${description}', 
+      `UPDATE source 
+      SET url = '${url}', 
       request_id = ${request_id} 
       WHERE id = ${id}`,
-    (error) => {
-      if (error) {
-        console.log(error);
-        res.send('Something went wrong.');
-        return;
-      }
-      res.send('Record has been updated');
-    });
+    (error) => handle_error(res, error, 'Record has been updated'));
   });
 });
   
-router.delete('/result/:id', (req, res) => {
+router.delete('/source/:id', (req, res) => {
   const id = req.params.id;
-  connection.query(`DELETE FROM result WHERE id = ${id}`,
-  (error) => {
-    if (error) {
-      console.log(error);
-      res.send('Something went wrong.');
-      return;
-    }
-    res.send('Record has been deleted');
-  });
+  connection.query(`DELETE FROM source WHERE id = ${id}`,
+  (error) => handle_error(res, error, 'Record has been deleted'));
 });
 
 module.exports = router;

@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "1699d1d1-9f53-465f-a032-d44246e8ef47",
+		"name": "DB_labs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25495703"
+	},
+	"item": [
+		{
+			"name": "ADD WITH ID",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"https://videos.google.com\",\n    \"request_id\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/source/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"source",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADD",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"https://www.yandex.com\",\n    \"request_id\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/source",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"source"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LIST",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3030/sources",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"sources"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"https://www.google.com\",\n    \"request_id\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/source/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"source",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"the very best title\",\n    \"description\": \"my result description\",\n    \"request_id\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/source/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"source",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"the very best title\",\n    \"description\": \"my result description\",\n    \"request_id\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3030/source/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3030",
+					"path": [
+						"source",
+						"10"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

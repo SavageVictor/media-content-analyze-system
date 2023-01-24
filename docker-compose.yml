@@ -1,0 +1,10 @@
+version: '3.0'
+services:
+  mysql:
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=k1llr34l
+    volumes:
+      - "./src/sql/db.sql:/docker-entrypoint-initdb.d/1.sql"
