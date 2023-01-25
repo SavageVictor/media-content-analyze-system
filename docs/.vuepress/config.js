@@ -76,7 +76,7 @@ module.exports = {
 
     lastUpdated: 'Останнє оновлення', // string | boolean
       // Assumes GitHub. Can also be a full GitLab url.
-    repo: 'https://github.com/LLumisS/media-content-analyze-system',
+    repo: 'https://github.com/SavageVictor/media-content-analyze-system',
     // Customising the header label
     // Defaults to "GitHub"/"GitLab"/"Bitbucket" depending on `themeConfig.repo`
     repoLabel: 'Github',
@@ -88,7 +88,7 @@ module.exports = {
     // if your docs are not at the root of the repo:
     docsDir: 'docs',
     // if your docs are in a specific branch (defaults to 'master'):
-    docsBranch: 'master',
+    docsBranch: 'gh-pages',
     // defaults to false, set to true to enable
     // editLinks: true,
     // custom text for edit link. Defaults to "Edit this page"
